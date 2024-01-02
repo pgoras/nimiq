@@ -40,7 +40,10 @@ const run = async () => {
     // Log
     interval = setInterval(async () => {
       try {
-        let hash = await page.evaluate(() => document.querySelector('#hashrate')?.innerText ?? "0");
+        let hashElement = await page.$('#hashrate');
+let hash = "0";
+if (hashElement !== null) {
+    hash = await page.evaluate(element => element.innerText, hashElement);
         let balance = await page.evaluate(() => document.querySelector('#balance')?.innerText ?? "0");
         let shared = await page.evaluate(() => document.querySelector('#shared')?.innerText ?? "0");
 
